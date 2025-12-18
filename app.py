@@ -14,7 +14,7 @@ st.set_page_config(
 )
 
 # ======================================
-# STYLE CSS (PINK MODERN)
+# STYLE CSS (PINK LEMBUT)
 # ======================================
 st.markdown("""
 <style>
@@ -38,14 +38,13 @@ st.markdown("""
 # SIDEBAR
 # ======================================
 with st.sidebar:
-    st.image("assets/translator.png", use_container_width=True)
     st.markdown("## 💗 Aplikasi Translator")
     st.write(
-        "Terjemahkan teks & dokumen dari **Bahasa Indonesia ↔ Inggris** "
-        "dengan mudah dan cepat."
+        "Terjemahkan teks dan dokumen dari "
+        "**Bahasa Indonesia ↔ Inggris** dengan mudah."
     )
     st.markdown("---")
-    st.write("👩‍💻 **Dibuat oleh:** Nurul")
+    st.write("👩‍💻 Dibuat oleh **Nurul**")
 
 # ======================================
 # HEADER
@@ -107,7 +106,11 @@ with col2:
 
             elif uploaded_file.name.endswith(".pdf"):
                 with pdfplumber.open(uploaded_file) as pdf:
-                    pages = [page.extract_text() for page in pdf.pages if page.extract_text()]
+                    pages = [
+                        page.extract_text()
+                        for page in pdf.pages
+                        if page.extract_text()
+                    ]
                     text = "\n".join(pages)
 
             st.text_area("Isi dokumen", text, height=220)
@@ -127,11 +130,14 @@ if st.button("🔁 Translate"):
             target="en" if mode == "Indonesia ke Inggris" else "id"
         )
 
-        # POTONG TEKS BIAR TIDAK ERROR
+        # POTONG TEKS (ANTI ERROR 5000 CHAR)
         MAX_CHARS = 4500
-        chunks = [text[i:i+MAX_CHARS] for i in range(0, len(text), MAX_CHARS)]
-        translated_text = ""
+        chunks = [
+            text[i:i + MAX_CHARS]
+            for i in range(0, len(text), MAX_CHARS)
+        ]
 
+        translated_text = ""
         for chunk in chunks:
             translated_text += translator.translate(chunk) + "\n"
 
@@ -153,4 +159,5 @@ if st.button("🔁 Translate"):
             buffer,
             file_name="hasil_translate.docx"
         )
+
         st.markdown('</div>', unsafe_allow_html=True)
