@@ -1,0 +1,5 @@
+streamlit
+deep-translator
+pandas
+python-docx
+pdfplumber
