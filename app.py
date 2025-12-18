@@ -8,7 +8,7 @@ import pdfplumber
 # KONFIGURASI HALAMAN
 # ===============================
 st.set_page_config(
-    page_title="Translator ID ↔ EN",
+    page_title="Translator by Nurul",
     layout="centered"
 )
 
